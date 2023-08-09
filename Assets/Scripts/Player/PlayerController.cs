@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int clicks = 0;
-    public bool isGrounded = true;
+    public bool isGrounded = false;
     public bool randomized = false;
     public int keyBinding = 123;
 
@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 1000f;
     public float jumpForce = 100f;
+
+    public
 
     void Start()
     {
@@ -33,7 +35,7 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
             }
-            else
+            else if (keyBinding.ToString()[0] == '3' && isGrounded)
             {
                 rb.AddForce(new Vector2(0, jumpForce));
             }
@@ -42,30 +44,30 @@ public class PlayerController : MonoBehaviour
         {
             if (keyBinding.ToString()[1] == '1')
             {
-                rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
+                rb.velocity = new Vector2(-speed * Time.deltaTime, rb.velocity.y);
             }
             else if (keyBinding.ToString()[1] == '2')
             {
-                rb.velocity = new Vector2(-speed * Time.deltaTime, rb.velocity.y);
+                rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
             }
-            else
+            else if (keyBinding.ToString()[1] == '3' && isGrounded)
             {
                 rb.AddForce(new Vector2(0, jumpForce));
             }
         }
-        if(Input.GetMouseButton(2) && isGrounded)
+        if(Input.GetMouseButton(2))
         {
             if (keyBinding.ToString()[2] == '1')
             {
-                rb.AddForce(new Vector2(0, jumpForce));
+                rb.velocity = new Vector2(-speed * Time.deltaTime, rb.velocity.y);
             }
             else if (keyBinding.ToString()[2] == '2')
             {
                 rb.velocity = new Vector2(speed * Time.deltaTime, rb.velocity.y);
             }
-            else
+            else if (keyBinding.ToString()[2] == '3' && isGrounded)
             {
-                rb.velocity = new Vector2(-speed * Time.deltaTime, rb.velocity.y);
+                rb.AddForce(new Vector2(0, jumpForce));
             }
         }
         if (clicks%10==0 && !randomized)
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour
             Randomize();
             randomized = true;
         }
-        else randomized = false;
+        else { randomized = false; }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

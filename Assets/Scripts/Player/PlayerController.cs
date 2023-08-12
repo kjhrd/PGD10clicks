@@ -1,9 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     public int clicks = 0;
+    public string scene = "Game1";
     public bool isGrounded = false;
     public bool randomized = false;
     public int keyBinding = 123;
@@ -76,6 +78,10 @@ public class PlayerController : MonoBehaviour
             randomized = true;
         }
         else { randomized = false; }
+        if (transform.position.y < -13f)
+        {
+            SceneManager.LoadScene(scene);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
 
     public
 
+
+    public float dashcooldown = 1f;
+    public float dash = 0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

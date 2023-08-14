@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
                 jump = 0f;
             }
         }
+        //
         if (keyBinding.ToString()[0] == '1')
         {
             transform.Translate(new Vector3(Input.GetAxis("Horizontal") * Time.timeScale * Time.deltaTime * speed, 0f));
